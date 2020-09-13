@@ -1,0 +1,11 @@
+.structure {
+  padding: 0.5rem 0;
+  border: 1px solid #000;
+  min-height: 350px;
+}
+
+.title {
+  padding: 0.5rem;
+  border-bottom: 1px solid #000;
+  margin-bottom: 1rem;
+}

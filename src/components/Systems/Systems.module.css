@@ -1,0 +1,24 @@
+.input {
+  position: relative;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.title > *:last-child {
+  margin-left: 0.5rem;
+}
+
+.Systems input {
+  margin-top: 0.5rem;
+  height: 2rem;
+  padding-left: 0.5rem;
+  width: 10rem;
+}
+
+.ListItemsWarper {
+  margin-top: 1rem;
+  margin-left: 2rem;
+}

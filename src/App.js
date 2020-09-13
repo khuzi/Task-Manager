@@ -2,7 +2,9 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 import classes from "./App.module.css";
 import General from "./components/general/general";
-
+import Benchmark from "./components/Benchmark/Benchmark";
+import Systems from "./components/Systems/Systems";
+import People from "./components/People/People";
 
 function App() {
   return (
@@ -13,16 +15,16 @@ function App() {
             <General />
           </Grid>
           <Grid item xs="12" md="6">
-            <General />
+            <Benchmark />
           </Grid>
         </Grid>
         <br />
         <Grid item container spacing="2">
           <Grid item xs="12" md="6">
-            <General />
+            <Systems />
           </Grid>
           <Grid item xs="12" md="6">
-            <General />
+            <People />
           </Grid>
         </Grid>
       </Grid>

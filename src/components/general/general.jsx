@@ -1,8 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { ItemsListContext } from "../../context/itemsContext";
 import classes from "./general.module.css";
-import InfoIcon from "@material-ui/icons/Info";
+import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import { Grid, Tooltip } from "@material-ui/core";
+import Structure from "../Structure/Structure";
+import ListItems from "../ListItems/ListItems";
+import HelperText from "../HelperText/HelperText";
 
 export default function General() {
   const values = useContext(ItemsListContext);
@@ -96,10 +99,7 @@ export default function General() {
   }, [values.editOtherKeyword]);
 
   return (
-    <div className={classes.general} style={{ border: "1px solid #000" }}>
-      <div className={classes.title}>
-        <h1>General</h1>
-      </div>
+    <Structure titleText="General">
       <div className={classes.formControl}>
         <Grid item xs="6">
           <label htmlFor="">Company Name</label>
@@ -108,7 +108,6 @@ export default function General() {
           <input type="text" />
         </Grid>
       </div>
-
       {inputFields.map((field) => {
         return (
           <>
@@ -116,7 +115,7 @@ export default function General() {
               <Grid item container xs="6" className={classes.labelWarper}>
                 <label htmlFor="">{field.label}</label>
                 <Tooltip title={field.tooltip}>
-                  <InfoIcon style={{ marginLeft: "1rem" }} />
+                  <InfoOutlinedIcon style={{ marginLeft: "1rem" }} />
                 </Tooltip>
               </Grid>
               <Grid item container xs="6" className={classes.inputWarper}>
@@ -125,72 +124,16 @@ export default function General() {
                   value={field.value}
                   onChange={(e) => handleChange(e, field.onChange)}
                 />
-                <p>
-                  <span
-                    onClick={(e) => {
-                      if (field.fetchEditItem) {
-                        field.onEdit(
-                          field.value,
-                          field.fetchEditItem.id,
-                          field.fetchItems,
-                          field.setFetchItems,
-                          field.setFetchEditItem
-                        );
-                        field.onChange("");
-                      } else if (field.value) {
-                        handleSubmit(
-                          e,
-                          field.onSubmit,
-                          field.value,
-                          field.onChange
-                        );
-                      }
-                    }}
-                  >
-                    +
-                  </span>{" "}
-                  &nbsp;
-                  {field.helperText}
-                </p>
+                <HelperText field={field} handleSubmit={handleSubmit} />
               </Grid>
             </Grid>
             <Grid container>
               <Grid item xs="7"></Grid>
-              <Grid item xs="5" className={classes.list}>
-                <ul style={{ maxHeight: "100px", overflowY: "auto" }}>
-                  {field.fetchItems.map((value) => {
-                    return (
-                      <li>
-                        {value.title}
-                        {value.title && (
-                          <div>
-                            <i
-                              class="fas fa-edit"
-                              onClick={() =>
-                                field.findItem(
-                                  value.id,
-                                  field.fetchItems,
-                                  field.setFetchEditItem
-                                )
-                              }
-                            ></i>
-                            <i
-                              class="fas fa-times-circle"
-                              onClick={(e) =>
-                                handleRemove(e, field.removeItems, value.id)
-                              }
-                            ></i>
-                          </div>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </Grid>
+              <ListItems field={field} handleRemove={handleRemove} columns="5"/>
             </Grid>
           </>
         );
       })}
-    </div>
+    </Structure>
   );
 }
